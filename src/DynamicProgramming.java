@@ -2,20 +2,23 @@ import java.util.Scanner;
 
 public class DynamicProgramming {
     public static void main(String[] args) {
-        Fibonacci();
+        System.out.println(Fibonacci());
     }
 
-    public static void Fibonacci() {
+    public static int Fibonacci() {
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
-        System.out.println(Fibonacci(input));
+        int[] memo = new int[input+1];
+        return Fibonacci(input, memo);
     }
 
-    public static int Fibonacci(int n) {
-        if (n <=1 ) {
+    public static int Fibonacci(int n, int[] memo) {
+        if (n <= 1 ) {
             return n;
+        } else if (memo[n] > 0) {
+            return memo[n];
         } else {
-            return Fibonacci(n-1) + Fibonacci( n-2);
+            return memo[n] = Fibonacci(n-1, memo) + Fibonacci( n-2, memo);
         }
     }
 }
