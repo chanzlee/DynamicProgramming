@@ -4,7 +4,8 @@ public class DynamicProgramming {
     public static void main(String[] args) {
 //        System.out.println(Fibonacci());
 //        MakeItOne();
-        RectangleTiling();
+//        RectangleTiling();
+        RectangleTilingTopDown();
     }
 
     public static long Fibonacci() {
@@ -115,4 +116,17 @@ public class DynamicProgramming {
         System.out.println(d[n]);
     }
 
+    public static void RectangleTilingTopDown () {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[] memo = new int[n+1];
+        System.out.println(RectangleTilingTopDown(n, memo));
+    }
+
+    public static int RectangleTilingTopDown (int n, int[] d) {
+        if (n <= 1) return 1;
+        if (d[n] > 0) return d[n];
+        return d[n] = (RectangleTilingTopDown(n-1, d) + RectangleTilingTopDown(n-2,d))%10007;
+
+    }
 }
