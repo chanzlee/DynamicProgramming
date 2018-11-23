@@ -24,6 +24,7 @@ public class DynamicProgramming {
         }
     }
 
+//2748
     public static long FibonacciBottomUp (int n) {
         long [] d = new long[n+1];
         d[0] = 0;
@@ -34,11 +35,12 @@ public class DynamicProgramming {
         return d[n];
     }
 
+//1463
     public static void MakeItOne () {
         Scanner sc = new Scanner(System.in);
         int input = sc.nextInt();
         int[] memo = new int[input+1];
-        System.out.println(MakeItOne(input, memo));
+        System.out.println(MakeItOneBottomUp(input));
     }
 
     public static int MakeItOne (int n, int[] d) {
@@ -65,7 +67,27 @@ public class DynamicProgramming {
                 d[n] = temp;
             }
         }
+        return d[n];
+    }
 
+    public static int MakeItOneBottomUp (int n) {
+        int[] d = new int[n+1];
+        d[1] = 0;
+        for (int i = 2; i<= n;i++) {
+            d[i] = d[i-1] + 1;
+            if (i % 3 == 0) {
+                int temp =  d[i/3] + 1;
+                if (d[i] > temp) {
+                    d[i] = temp;
+                }
+            }
+            if (i % 2 == 0) {
+                int temp = d[i/2] + 1;
+                if (d[i] > temp) {
+                    d[i] = temp;
+                }
+            }
+        }
         return d[n];
     }
 }
