@@ -3,7 +3,8 @@ import java.util.Scanner;
 public class DynamicProgramming {
     public static void main(String[] args) {
 //        System.out.println(Fibonacci());
-        MakeItOne();
+//        MakeItOne();
+        RectangleTiling();
     }
 
     public static long Fibonacci() {
@@ -90,4 +91,28 @@ public class DynamicProgramming {
         }
         return d[n];
     }
+
+    public static void RectangleTiling() {
+        //Filling 2 x n rectangle with 2 x 1 rectangles, count all possibility
+
+        //first step =>  1 vertical or  2 in horizontal
+        // d[n] = d[n-1] + d[n-2]
+
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        if (n==0) System.out.println(1);
+
+        int[] d = new int[n+1];
+
+        // filling 2 x 0 rectangle can be done in 1 way, with putting empty rectangle (like empty set).
+        d[0] = 1;
+
+        d[1] = 1;
+        for (int i=2;  i <= n; i ++) {
+            d[i] = d[i-1] + d[i-2];
+        }
+
+        System.out.println(d[n]);
+    }
+
 }
